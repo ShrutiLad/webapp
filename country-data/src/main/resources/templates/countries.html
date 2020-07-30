@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
+    <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/main.js" th:src="@{js/main.js}"></script>
+    <title>List of Countries</title>
+</head>
+<body>
+<h1>List Of Countries</h1>
+<div class="container">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Add Country</button>
+    <table class="table table-stripped">
+    <tr>
+        <td>Id</td>
+        <td>Capital</td>
+        <td>CountryName</td>
+        <td>UpdatedBy</td>
+        <td>UpdatedOn</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    <tr th:each = "country:${countries}">
+        <td th:text = "${country.Id}">Id</td>
+        <td th:text = "${country.capital}">Capital</td>
+        <td th:text = "${country.countryName}">CountryName</td>
+        <td th:text = "${country.updatedBy}">UpdatedBy</td>
+        <td th:text = "${country.updatedOn}">UpdatedOn</td>
+        <td><a th:href="@{/onecountry/(Id=${country.Id})}" class="btn btn-warning editButton">Edit</a>
+        <td><a class="btn btn-danger deleteButton">Delete</a></td>
+    </tr>
+</table>
+</div>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/addNew}" method="post">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Country</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="Id" class="col-form-label">Id:</label>
+                        <input type="text" class="form-control" id="IdAdd" name="Id">
+                    </div>
+                    <div class="form-group">
+                        <label for="capital" class="col-form-label">Capital:</label>
+                        <input type="text" class="form-control" id="capitalAdd" name="capital">
+                    </div>
+                    <div class="form-group">
+                        <label for="countryName" class="col-form-label">Country:</label>
+                        <input type="text" class="form-control" id="countryNameAdd" name="countryName">
+                    </div>
+                    <div class="form-group">
+                        <label for="updatedBy" class="col-form-label">UpdatedBy:</label>
+                        <input type="text" class="form-control" id="updatedByAdd" name="updatedBy">
+                    </div>
+                    <div class="form-group">
+                        <label for="updatedOn" class="col-form-label">UpdatedOn:</label>
+                        <input type="text" class="form-control" id="updatedOnAdd" name="updatedOn">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/save}" method="put">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Country</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="Id" class="col-form-label">Id:</label>
+                        <input type="text" class="form-control" id="IdEdit" name="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="capital" class="col-form-label">Capital:</label>
+                        <input type="text" class="form-control" id="capitalEdit" name="capital">
+                    </div>
+                    <div class="form-group">
+                        <label for="countryName" class="col-form-label">Country:</label>
+                        <input type="text" class="form-control" id="countryNameEdit" name="countryName">
+                    </div>
+                    <div class="form-group">
+                        <label for="updatedBy" class="col-form-label">UpdatedBy:</label>
+                        <input type="text" class="form-control" id="updatedByEdit" name="updatedBy">
+                    </div>
+                    <div class="form-group">
+                        <label for="updatedOn" class="col-form-label">UpdatedOn:</label>
+                        <input type="text" class="form-control" id="updatedOnEdit" name="updatedOn">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
